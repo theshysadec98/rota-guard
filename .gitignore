@@ -1,0 +1,45 @@
+scripts/
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+
+# --- IDE ---
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+*~
+
+# --- Java / Gradle ---
+.gradle/
+build/
+out/
+*.class
+*.jar
+*.war
+*.log
+hs_err_pid*
+
+# --- Node ---
+node_modules/
+dist/
+.npm
+*.tsbuildinfo
+
+# --- Env & secrets ---
+.env
+.env.*
+!.env.example
+
+# --- Docker (local overrides) ---
+docker-compose.override.yml
+
+# --- DB / runtime data ---
+pgdata/
+*.pid
+
+# --- Frontend ---
+.next/
+coverage/

@@ -1,0 +1,10 @@
+${AnsiColor.BRIGHT_CYAN}
+ _   _           _     _
+| \ | | ___  ___| |__ (_)_ __
+|  \| |/ _ \/ __| '_ \| | '_ \
+| |\  |  __/ (__| | | | | | | |
+|_| \_|\___|\___|_| |_|_|_| |_|
+
+${AnsiColor.BRIGHT_WHITE}:: Nhom I - Rota Guard ::${AnsiColor.DEFAULT}
+${AnsiColor.BRIGHT_GREEN}Rota Guard${AnsiColor.DEFAULT} ${application.version:unknown}
+${AnsiColor.DEFAULT}
