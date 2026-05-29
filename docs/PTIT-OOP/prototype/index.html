@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hospital Shift Scheduling Prototype</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="theme-dark">
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">H</div>
+          <div>
+            <p class="brand-title">Hospia</p>
+            <p class="brand-subtitle">Shift OS</p>
+          </div>
+        </div>
+        <div class="nav-group">
+          <p class="nav-title">Staff</p>
+          <a href="#st-01" class="nav-link">ST-01 Dashboard cá nhân</a>
+          <a href="#st-02" class="nav-link">ST-02 Lịch của tôi</a>
+          <a href="#st-03" class="nav-link">ST-03 Smart Shift Swap</a>
+        </div>
+        <div class="nav-group">
+          <p class="nav-title">Manager</p>
+          <a href="#mg-01" class="nav-link">MG-01 Dashboard</a>
+          <a href="#mg-02" class="nav-link">MG-02 Master Schedule</a>
+          <a href="#mg-03" class="nav-link">MG-03 Approval Workflow</a>
+        </div>
+        <div class="nav-group">
+          <p class="nav-title">Super Admin</p>
+          <a href="#sa-01" class="nav-link">SA-01 Tenants</a>
+        </div>
+        <div class="nav-group">
+          <p class="nav-title">System</p>
+          <a href="#sys-01" class="nav-link">SYS-01 Rule Engine</a>
+        </div>
+        <div class="sidebar-footer">
+          <div class="status-pill">
+            <span class="dot"></span>
+            Prototype ready
+          </div>
+          <button type="button" class="ghost" data-action="toggle-theme">Toggle theme</button>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Hospital Shift Management</p>
+            <h1>Prototype Coverage — Full Specs</h1>
+          </div>
+          <div class="topbar-actions">
+            <div class="search-chip">
+              <span>⌘</span>
+              <span>Tìm kiếm nhanh…</span>
+            </div>
+            <div class="user-chip">
+              <span class="avatar">DL</span>
+              Dr. Lan / Manager
+            </div>
+          </div>
+        </header>
+
+        <section class="screen" id="st-01">
+          <div class="screen-header">
+            <div>
+              <p class="screen-kicker">Staff · ST-01</p>
+              <h2>Dashboard cá nhân</h2>
+              <p class="screen-subtitle">
+                Tổng quan ca trực, cảnh báo burnout, quick actions, recent requests và thông báo.
+              </p>
+            </div>
+            <div class="screen-actions">
+              <button type="button" class="chip" data-state-group="st01-next" data-state="loading">
+                Next Shift: Loading
+              </button>
+              <button type="button" class="chip" data-state-group="st01-next" data-state="empty">
+                Next Shift: Empty
+              </button>
+              <button type="button" class="chip" data-state-group="st01-next" data-state="error">
+                Next Shift: Error
+              </button>
+              <button type="button" class="chip" data-state-group="st01-next" data-state="default">
+                Next Shift: Default
+              </button>
+            </div>
+          </div>
+
+          <div class="grid two">
+            <div class="card state-group" data-state-group="st01-next">
+              <div class="state state-default is-active">
+                <div class="card-header">
+                  <div>
+                    <p class="card-title">Ca trực sắp tới</p>
+                    <h3>Ca Sáng · 29/05/2026</h3>
+                  </div>
+                  <span class="badge info">⏱ 16h 51p</span>
+                </div>
+                <div class="row">
+                  <div>
+                    <p class="muted">Giờ</p>
+                    <p>06:00 – 14:00</p>
+                  </div>
+                  <div>
+                    <p class="muted">Khoa</p>
+                    <p>Nội tổng hợp</p>
+                  </div>
+                  <div>
+                    <p class="muted">Countdown</p>
+                    <p class="pulse">Còn 16h 51p</p>
+                  </div>
+                </div>
+                <div class="banner warn">⚠️ Lịch mới vừa được publish — kiểm tra ca thay đổi.</div>
+              </div>
+              <div class="state state-loading">
+                <div class="skeleton tall"></div>
+              </div>
+              <div class="state state-empty">
+                <div class="empty">🎉 Không có ca trực sắp tới</div>
+              </div>
+              <div class="state state-error">
+                <div class="error">⚠️ Không thể tải thông tin ca trực</div>
+                <button type="button" class="ghost">Thử lại</button>
+              </div>
+            </div>
+
+            <div class="stack">
+              <div class="grid two">
+                <div class="card">
+                  <p class="card-title">Tổng giờ trực (tháng)</p>
+                  <h3>120h <span class="muted">/ TB khoa 110h</span></h3>
+                  <p class="danger">⚠️ +9% so với TB</p>
+                </div>
+                <div class="card">
+                  <p class="card-title">Ngày phép còn lại</p>
+                  <h3>8 / 12 ngày</h3>
+                  <p class="muted">ANNUAL · cập nhật hôm nay</p>
+                </div>
+              </div>
+
+              <div class="grid two">
+                <button type="button" class="cta" data-action="open-modal" data-target="leave-modal">
+                  📝 Xin nghỉ phép
+                </button>
+                <button type="button" class="cta ghost">🔄 Xin đổi ca</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid two">
+            <div class="card">
+              <div class="card-header">
+                <p class="card-title">Yêu cầu gần đây</p>
+                <button type="button" class="ghost">Xem tất cả</button>
+              </div>
+              <ul class="list">
+                <li>
+                  <span>Swap · 25/05/2026</span>
+                  <span class="badge warning">⏳ Pending</span>
+                </li>
+                <li>
+                  <span>Leave · 20/05/2026</span>
+                  <span class="badge success">✅ Approved</span>
+                </li>
+                <li>
+                  <span>Swap · 15/05/2026</span>
+                  <span class="badge danger">❌ Rejected</span>
+                </li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <p class="card-title">Thông báo</p>
+                <span class="badge danger">3 mới</span>
+              </div>
+              <ul class="list">
+                <li class="highlight">
+                  <span>Lịch tháng 06/2026 đã được công bố</span>
+                  <span class="muted">2h trước</span>
+                </li>
+                <li class="highlight">
+                  <span>Yêu cầu đổi ca #45 đã được duyệt</span>
+                  <span class="muted">1 ngày trước</span>
+                </li>
+                <li>
+                  <span>Nhắc: Ca Đêm ngày 30/05 bắt đầu lúc 22:00</span>
+                  <span class="muted">1 ngày trước</span>
+                </li>
+              </ul>
+              <div class="banner danger">⚠️ Bạn đang có nguy cơ kiệt sức. Hãy liên hệ Trưởng khoa.</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="screen" id="st-02">
+          <div class="screen-header">
+            <div>
+              <p class="screen-kicker">Staff · ST-02</p>
+              <h2>Lịch của tôi (FullCalendar)</h2>
+              <p class="screen-subtitle">
+                Month/Week/List views, popover chi tiết, banner chưa publish, badge mới/cập nhật.
+              </p>
+            </div>
+            <div class="screen-actions">
+              <button type="button" class="chip" data-state-group="st02-calendar" data-state="loading">
+                Loading
+              </button>
+              <button type="button" class="chip" data-state-group="st02-calendar" data-state="empty">
+                Empty
+              </button>
+              <button type="button" class="chip" data-state-group="st02-calendar" data-state="not-published">
+                Not Published
+              </button>
+              <button type="button" class="chip" data-state-group="st02-calendar" data-state="error">
+                Error
+              </button>
+              <button type="button" class="chip" data-state-group="st02-calendar" data-state="default">
+                Default
+              </button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="calendar-header">
+              <div>
+                <h3>Lịch của tôi</h3>
+                <p class="muted">FullCalendar integration placeholder</p>
+              </div>
+              <div class="toggle">
+                <button type="button" class="toggle-btn is-active" data-view="month">Tháng</button>
+                <button type="button" class="toggle-btn" data-view="week">Tuần</button>
+                <button type="button" class="toggle-btn" data-view="list">Danh sách</button>
+              </div>
+            </div>
+            <div class="calendar-nav">
+              <button type="button" class="ghost">◀</button>
+              <span>Tháng 6, 2026</span>
+              <button type="button" class="ghost">▶</button>
+              <button type="button" class="chip">Today</button>
+            </div>
+
+            <div class="state-group" data-state-group="st02-calendar">
+              <div class="state state-default is-active">
+                <div class="calendar-grid" data-view-container>
+                  <div class="calendar-week">
+                    <span>T2</span><span>T3</span><span>T4</span><span>T5</span><span>T6</span><span>T7</span
+                      ><span>CN</span>
+                  </div>
+                  <div class="calendar-row">
+                    <div class="calendar-cell"></div>
+                    <div class="calendar-cell event morning" data-action="open-popover" data-target="shift-popover">
+                      <span class="event-tag">S</span>
+                    </div>
+                    <div class="calendar-cell"></div>
+                    <div class="calendar-cell"></div>
+                    <div class="calendar-cell event afternoon">
+                      <span class="event-tag">C</span>
+                    </div>
+                    <div class="calendar-cell"></div>
+                    <div class="calendar-cell"></div>
+                  </div>
+                  <div class="calendar-row">
+                    <div class="calendar-cell event night">
+                      <span class="event-tag">Đ</span>
+                    </div>
+                    <div class="calendar-cell"></div>
+                    <div class="calendar-cell"></div>
+                    <div class="calendar-cell event morning">
+                      <span class="event-tag">S</span>
+                      <span class="badge info">Mới</span>
+                    </div>
+                    <div class="calendar-cell"></div>
+                    <div class="calendar-cell"></div>
+                    <div class="calendar-cell event afternoon">
+                      <span class="event-tag">C</span>
+                      <span class="badge warning">Cập nhật</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="state state-loading">
+                <div class="skeleton tall"></div>
+              </div>
+              <div class="state state-empty">
+                <div class="empty">📭 Bạn chưa có ca trực trong tháng này</div>
+              </div>
+              <div class="state state-not-published">
+                <div class="banner warning">Lịch tháng 7 chưa được công bố</div>
+              </div>
+              <div class="state state-error">
+                <div class="error">❌ Không thể tải lịch</div>
+                <button type="button" class="ghost">Thử lại</button>
+              </div>
+            </div>
+
+            <div class="legend">
+              <span class="dot morning"></span> Ca sáng
+              <span class="dot afternoon"></span> Ca chiều
+              <span class="dot night"></span> Ca đêm
+            </div>
+          </div>
+        </section>
+
+        <section class="screen" id="st-03">
+          <div class="screen-header">
+            <div>
+              <p class="screen-kicker">Staff · ST-03</p>
+              <h2>Smart Shift Swap</h2>
+              <p class="screen-subtitle">Eligibility pipeline + top 3 recommendations + rule violations.</p>
+            </div>
+            <div class="screen-actions">
+              <button type="button" class="chip" data-state-group="st03-candidates" data-state="loading">
+                Loading
+              </button>
+              <button type="button" class="chip" data-state-group="st03-candidates" data-state="empty">
+                Empty
+              </button>
+              <button type="button" class="chip" data-state-group="st03-candidates" data-state="default">
+                Default
+              </button>
+            </div>
+          </div>
+
+          <div class="grid two">
+            <div class="card">
+              <div class="card-header">
+                <p class="card-title">Ca cần đổi</p>
+                <span class="badge info">PUBLISHED</span>
+              </div>
+              <h3>Ca Đêm · 03/06/2026</h3>
+              <p class="muted">21:00 – 07:00 · ICU</p>
+              <div class="scanline"></div>
+              <div class="rule-list">
+                <span class="badge danger">HR-SWP-06: Chỉ đổi ca tương lai</span>
+                <span class="badge danger">HR-SWP-07: Pending ≤ 3</span>
+              </div>
+              <div class="field" style="margin-top: 16px;">
+                <label>🔍 Tìm đồng nghiệp khác</label>
+                <input type="text" placeholder="Tìm kiếm tên/mã BS..." style="width: 100%; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: rgba(255,255,255,0.03); color: var(--text); margin-bottom: 8px;" />
+                <div class="colleague-list" style="display: grid; gap: 8px; max-height: 120px; overflow-y: auto; background: rgba(0,0,0,0.2); padding: 8px; border-radius: 8px; border: 1px solid var(--border);">
+                  <div class="colleague-item" style="display: flex; justify-content: space-between; align-items: center; font-size: 12px;">
+                    <span>BS. Nguyễn E — Nội khoa</span>
+                    <span class="badge success" style="cursor: pointer; padding: 2px 8px; border-radius: 4px;">Chọn</span>
+                  </div>
+                  <div class="colleague-item" style="display: flex; justify-content: space-between; align-items: center; font-size: 12px; opacity: 0.6;">
+                    <span>BS. Trần D — Ngoại khoa</span>
+                    <span class="badge danger" style="padding: 2px 8px; border-radius: 4px;">🔴 Khác chuyên khoa</span>
+                  </div>
+                  <div class="colleague-item" style="display: flex; justify-content: space-between; align-items: center; font-size: 12px; opacity: 0.6;">
+                    <span>BS. Lê F — Nội khoa</span>
+                    <span class="badge danger" style="padding: 2px 8px; border-radius: 4px;">🔴 Đang nghỉ phép</span>
+                  </div>
+                </div>
+              </div>
+              <div class="field">
+                <label>Lý do đổi ca</label>
+                <textarea placeholder="Nhập lý do..."></textarea>
+              </div>
+              <button type="button" class="cta">Gửi yêu cầu đổi ca</button>
+            </div>
+
+            <div class="card state-group" data-state-group="st03-candidates">
+              <div class="state state-default is-active">
+                <div class="card-header">
+                  <p class="card-title">Top 3 gợi ý phù hợp</p>
+                  <span class="badge success">Score 92%</span>
+                </div>
+                <div class="recommendations">
+                  <div class="recommendation">
+                    <span class="avatar">NA</span>
+                    <div>
+                      <p>BS. Nguyễn A</p>
+                      <p class="muted">20h/tháng · 1 ca đêm/tuần</p>
+                    </div>
+                    <button type="button" class="ghost">Chọn</button>
+                  </div>
+                  <div class="recommendation">
+                    <span class="avatar">TB</span>
+                    <div>
+                      <p>BS. Trần B</p>
+                      <p class="muted">26h/tháng · 0 ca đêm/tuần</p>
+                    </div>
+                    <button type="button" class="ghost">Chọn</button>
+                  </div>
+                  <div class="recommendation">
+                    <span class="avatar">LC</span>
+                    <div>
+                      <p>BS. Lê C</p>
+                      <p class="muted">30h/tháng · 2 ca đêm/tuần</p>
+                    </div>
+                    <button type="button" class="ghost" disabled>Khác chuyên khoa</button>
+                  </div>
+                </div>
+                <div class="banner warning">⚠️ 2 ứng viên bị loại do vi phạm 12h nghỉ.</div>
+              </div>
+              <div class="state state-loading">
+                <div class="skeleton tall"></div>
+              </div>
+              <div class="state state-empty">
+                <div class="empty">📭 Không có ứng viên phù hợp</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="screen" id="mg-01">
+          <div class="screen-header">
+            <div>
+              <p class="screen-kicker">Manager · MG-01</p>
+              <h2>Dashboard Trưởng khoa</h2>
+              <p class="screen-subtitle">Stats tuần, quick approve, upcoming shifts, alerts.</p>
+            </div>
+          </div>
+
+          <div class="grid three">
+            <div class="card">
+              <p class="card-title">Tổng ca tuần này</p>
+              <h3>42</h3>
+              <p class="muted">Published</p>
+            </div>
+            <div class="card">
+              <p class="card-title">Tỷ lệ vắng mặt</p>
+              <h3>4.8%</h3>
+              <p class="muted">Tuần hiện tại</p>
+            </div>
+            <div class="card">
+              <p class="card-title">Fairness Score</p>
+              <div class="progress">
+                <span style="width: 82%"></span>
+              </div>
+              <p class="muted">82% · Fair</p>
+            </div>
+          </div>
+
+          <div class="grid two">
+            <div class="card">
+              <div class="card-header">
+                <p class="card-title">Yêu cầu chờ duyệt</p>
+                <span class="badge danger">5</span>
+              </div>
+              <ul class="list">
+                <li>
+                  <span>Nguyễn A · Swap · 02/06</span>
+                  <div class="inline-actions">
+                    <button type="button" class="chip">Duyệt nhanh</button>
+                    <button type="button" class="ghost">Chi tiết</button>
+                  </div>
+                </li>
+                <li>
+                  <span>Trần B · Leave · 05/06</span>
+                  <div class="inline-actions">
+                    <button type="button" class="chip">Duyệt nhanh</button>
+                    <button type="button" class="ghost">Chi tiết</button>
+                  </div>
+                </li>
+              </ul>
+              <button type="button" class="ghost">Xem tất cả →</button>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <p class="card-title">Cảnh báo</p>
+                <span class="badge warning">4</span>
+              </div>
+              <ul class="list">
+                <li>⚠️ Ca đêm 03/06: thiếu 1 bác sĩ</li>
+                <li>🔴 BS Lê C: 3 ca đêm/tuần (burnout)</li>
+                <li>⚠️ BS Phạm D: nghỉ &lt; 12h giữa 2 ca</li>
+              </ul>
+              <button type="button" class="ghost">Đi tới Master Schedule</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <p class="card-title">Lịch trực tuần trực quan</p>
+              <span class="badge info">Tuần 03/06 - 09/06</span>
+            </div>
+            <div class="shift-legend">
+              <span class="shift-dot status-morning"></span> Ca sáng
+              <span class="shift-dot status-afternoon"></span> Ca chiều
+              <span class="shift-dot status-night"></span> Ca đêm
+              <span class="shift-dot status-warning"></span> Cảnh báo
+              <span class="shift-dot status-danger"></span> Vi phạm
+              <span class="shift-dot status-off"></span> Off
+            </div>
+            <div class="week-schedule">
+              <div class="week-header">
+                <div class="week-label">Tuần</div>
+                <div>T2 · 03/06</div>
+                <div>T3 · 04/06</div>
+                <div>T4 · 05/06</div>
+                <div>T5 · 06/06</div>
+                <div>T6 · 07/06</div>
+                <div>T7 · 08/06</div>
+                <div>CN · 09/06</div>
+              </div>
+              <div class="week-grid">
+                <div class="week-row">
+                  <div class="week-label">
+                    Sáng
+                    <span class="muted">06:00–14:00</span>
+                  </div>
+                  <div class="week-cell">
+                    <span class="shift-pill status-morning">Nguyễn A · ICU</span>
+                    <span class="shift-pill status-morning">Trần B · ER</span>
+                  </div>
+                  <div class="week-cell">
+                    <span class="shift-pill status-warning">Nguyễn A · Nghỉ 12h</span>
+                    <span class="shift-pill status-morning">Lê C · ER</span>
+                  </div>
+                  <div class="week-cell">
+                    <span class="shift-pill status-morning">Nguyễn A · ER</span>
+                    <span class="shift-pill status-off">Trần B · Off</span>
+                  </div>
+                  <div class="week-cell">
+                    <span class="shift-pill status-morning">Trần B · ICU</span>
+                    <span class="shift-pill status-leave">Lê C · Leave</span>
+                  </div>
+                  <div class="week-cell">
+                    <span class="shift-pill status-morning">Nguyễn A · ICU</span>
+                    <span class="shift-pill status-swap">Trần B · Swap Pending</span>
+                  </div>
+                  <div class="week-cell">
+                    <span class="shift-pill status-off">Nguyễn A · Off</span>
+                    <span class="shift-pill status-morning">Lê C · ER</span>
+                  </div>
+                  <div class="week-cell">
+                    <span class="shift-pill status-morning">Trần B · ICU</span>
+                    <span class="shift-pill status-rest">Lê C · Nghỉ 24h</span>
+                  </div>
+                </div>
+                <div class="week-row">
+                  <div class="week-label">
+                    Chiều
+                    <span class="muted">14:00–22:00</span>
+                  </div>
+                  <div class="week-cell">
+                    <span class="shift-pill status-afternoon">Lê C · ER</span>
+                  </div>
+                  <div class="week-cell">
+                    <span class="shift-pill status-afternoon">Nguyễn A · ER</span>
+                    <span class="shift-pill status-afternoon">Trần B · ICU</span>
+                  </div>
+                  <div class="week-cell">
+                    <span class="shift-pill status-off">Nguyễn A · Off</span>
+                    <span class="shift-pill status-afternoon">Lê C · ICU</span>
+                  </div>
+                  <div class="week-cell">
+                    <span class="shift-pill status-afternoon">Trần B · ER</span>
+                    <span class="shift-pill status-warning">Lê C · Nghỉ 14h</span>
+                  </div>
+                  <div class="week-cell">
+                    <span class="shift-pill status-afternoon">Nguyễn A · ICU</span>
+                    <span class="shift-pill status-off">Trần B · Off</span>
+                  </div>
+                  <div class="week-cell">
+                    <span class="shift-pill status-afternoon">Lê C · ER</span>
+                  </div>
+                  <div class="week-cell">
+                    <span class="shift-pill status-afternoon">Nguyễn A · ICU</span>
+                    <span class="shift-pill status-swap">Lê C · Swap Offer</span>
+                  </div>
+                </div>
+                <div class="week-row">
+                  <div class="week-label">
+                    Đêm
+                    <span class="muted">22:00–06:00</span>
+                  </div>
+                  <div class="week-cell">
+                    <span class="shift-pill status-night">Trần B · ER</span>
+                    <span class="shift-pill status-danger">Nguyễn A · Nghỉ 8h</span>
+                  </div>
+                  <div class="week-cell">
+                    <span class="shift-pill status-night">Nguyễn A · ICU</span>
+                  </div>
+                  <div class="week-cell">
+                    <span class="shift-pill status-night">Lê C · ICU</span>
+                    <span class="shift-pill status-rest">Trần B · Nghỉ 12h</span>
+                  </div>
+                  <div class="week-cell">
+                    <span class="shift-pill status-night">Nguyễn A · ICU</span>
+                    <span class="shift-pill status-off">Trần B · Off</span>
+                  </div>
+                  <div class="week-cell">
+                    <span class="shift-pill status-night">Lê C · ICU</span>
+                  </div>
+                  <div class="week-cell">
+                    <span class="shift-pill status-rest">Nguyễn A · Nghỉ 24h</span>
+                  </div>
+                  <div class="week-cell">
+                    <span class="shift-pill status-night">Trần B · ER</span>
+                    <span class="shift-pill status-leave">Lê C · Leave</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <p class="card-title">Ca trực sắp tới</p>
+              <span class="badge info">5 ca</span>
+            </div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Ca</th>
+                  <th>Giờ</th>
+                  <th>Bác sĩ</th>
+                  <th>Trạng thái</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Ca Sáng</td>
+                  <td>07:00 - 14:00</td>
+                  <td>Nguyễn A</td>
+                  <td><span class="badge success">Đang diễn ra</span></td>
+                </tr>
+                <tr>
+                  <td>Ca Chiều</td>
+                  <td>14:00 - 21:00</td>
+                  <td>Trần B</td>
+                  <td><span class="badge info">Sắp tới</span></td>
+                </tr>
+                <tr>
+                  <td>Ca Đêm</td>
+                  <td>21:00 - 07:00</td>
+                  <td>Lê C</td>
+                  <td><span class="badge muted">Kết thúc</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="screen" id="mg-02">
+          <div class="screen-header">
+            <div>
+              <p class="screen-kicker">Manager · MG-02</p>
+              <h2>Master Schedule — Core Engine</h2>
+              <p class="screen-subtitle">
+                Heatmap, fairness realtime, drag & drop, validate rules, publish lock, staffing coverage.
+              </p>
+            </div>
+            <div class="screen-actions">
+              <button type="button" class="chip" data-state-group="mg02-board" data-state="draft">Draft View</button>
+              <button type="button" class="chip" data-state-group="mg02-board" data-state="validated">Validated</button>
+              <button type="button" class="chip" data-state-group="mg02-board" data-state="blocked">Blocked</button>
+              <button type="button" class="chip">Auto Draft</button>
+              <button type="button" class="chip">Validate Rules</button>
+              <button type="button" class="cta" disabled>Publish</button>
+            </div>
+          </div>
+
+          <div class="grid three">
+            <div class="card">
+              <div class="card-header">
+                <p class="card-title">Fairness Score (Realtime)</p>
+                <span class="badge warning">72%</span>
+              </div>
+              <div class="progress danger">
+                <span style="width: 72%"></span>
+              </div>
+              <p class="muted">PR-FAR-01 target 85% · σ/μ = 0.28</p>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <p class="card-title">Burnout Heatmap</p>
+                <span class="badge danger">2 Critical</span>
+              </div>
+              <div class="heatmap">
+                <span class="heat normal">BS A · NORMAL</span>
+                <span class="heat warn">BS B · WARNING</span>
+                <span class="heat danger">BS C · CRITICAL</span>
+                <span class="heat warn">BS D · WARNING</span>
+              </div>
+              <p class="muted">SR-SCH-01 / HR-SCH-01 / HR-SCH-02</p>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <p class="card-title">Coverage Gauge</p>
+                <span class="badge info">Min staff</span>
+              </div>
+              <div class="kpi">
+                <div>
+                  <h3>96%</h3>
+                  <p class="muted">Đủ nhân sự hôm nay</p>
+                </div>
+                <div class="kpi-list">
+                  <span class="data-pill warning">ICU thiếu 1</span>
+                  <span class="data-pill">ER đủ</span>
+                </div>
+              </div>
+              <p class="muted">HR-SCH-05 minimum coverage</p>
+            </div>
+          </div>
+
+          <div class="grid two">
+            <div class="card">
+              <div class="card-header">
+                <p class="card-title">Rule Validation Panel</p>
+                <span class="badge danger">2 Hard</span>
+              </div>
+              <div class="rule-panel">
+                <div>
+                  <p class="muted">Hard Violations</p>
+                  <ul class="list">
+                    <li>HR-SCH-01: Rest gap &lt; 12h (BS B, T4)</li>
+                    <li>HR-SCH-02: 4 ca đêm liên tiếp (BS C)</li>
+                  </ul>
+                </div>
+                <div>
+                  <p class="muted">Soft Warnings</p>
+                  <ul class="list">
+                    <li>SR-SCH-01: 2 ca đêm/tuần (BS D)</li>
+                    <li>SR-SCH-02: &gt; 48h/tuần (BS A)</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="banner danger">Publish bị khóa cho tới khi Hard Rules = 0.</div>
+              <div class="inline-actions">
+                <button type="button" class="ghost">Auto-fix đề xuất</button>
+                <button type="button" class="chip">Xuất báo cáo</button>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <p class="card-title">Drag & Drop Lane</p>
+                <span class="badge info">Draft</span>
+              </div>
+              <div class="drag-lane">
+                <div class="drag-col">
+                  <p class="muted">Unassigned</p>
+                  <span class="data-pill">Ca Đêm · 03/06</span>
+                  <span class="data-pill warning">Ca Chiều · 04/06</span>
+                </div>
+                <div class="drag-col">
+                  <p class="muted">ICU</p>
+                  <span class="data-pill">BS A · Ca Sáng</span>
+                  <span class="data-pill danger">BS B · Ca Đêm (rest gap)</span>
+                </div>
+                <div class="drag-col">
+                  <p class="muted">ER</p>
+                  <span class="data-pill">BS C · Ca Chiều</span>
+                  <span class="data-pill">BS D · Ca Sáng</span>
+                </div>
+              </div>
+              <div class="legend row">
+                <span class="badge danger">🚫 Block</span>
+                <span class="badge warning">⚠️ Warning</span>
+                <span class="badge info">✅ OK</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card state-group" data-state-group="mg02-board">
+            <div class="state state-draft is-active">
+              <div class="card-header">
+                <p class="card-title">Lịch trực tuần (Draft)</p>
+                <span class="badge info">Draft</span>
+              </div>
+              <div class="shift-legend">
+                <span class="shift-dot status-morning"></span> Ca sáng
+                <span class="shift-dot status-afternoon"></span> Ca chiều
+                <span class="shift-dot status-night"></span> Ca đêm
+                <span class="shift-dot status-warning"></span> Cảnh báo
+                <span class="shift-dot status-danger"></span> Vi phạm
+                <span class="shift-dot status-off"></span> Off
+              </div>
+              <div class="week-schedule">
+                <div class="week-header">
+                  <div class="week-label">Tuần</div>
+                  <div>T2 · 03/06</div>
+                  <div>T3 · 04/06</div>
+                  <div>T4 · 05/06</div>
+                  <div>T5 · 06/06</div>
+                  <div>T6 · 07/06</div>
+                  <div>T7 · 08/06</div>
+                  <div>CN · 09/06</div>
+                </div>
+                <div class="week-grid">
+                  <div class="week-row">
+                    <div class="week-label">
+                      Sáng
+                      <span class="muted">06:00–14:00</span>
+                    </div>
+                    <div class="week-cell">
+                      <span class="shift-pill status-morning">
+                        <span class="pill-title">Nguyễn A · ICU <span>OK</span></span>
+                        <span class="pill-meta">Sáng · 06:00–14:00</span>
+                      </span>
+                      <span class="shift-pill status-morning">
+                        <span class="pill-title">Trần B · ER <span>OK</span></span>
+                        <span class="pill-meta">Sáng · 06:00–14:00</span>
+                      </span>
+                    </div>
+                    <div class="week-cell">
+                      <span class="shift-pill status-warning">
+                        <span class="pill-title">Nguyễn A · Nghỉ 12h <span>WARN</span></span>
+                        <span class="pill-meta">HR-SCH-01 sát ngưỡng</span>
+                      </span>
+                      <span class="shift-pill status-morning">
+                        <span class="pill-title">Lê C · ER <span>OK</span></span>
+                        <span class="pill-meta">Sáng · 06:00–14:00</span>
+                      </span>
+                    </div>
+                    <div class="week-cell">
+                      <span class="shift-pill status-morning">
+                        <span class="pill-title">Nguyễn A · ER <span>OK</span></span>
+                        <span class="pill-meta">Sáng · 06:00–14:00</span>
+                      </span>
+                      <span class="shift-pill status-off">
+                        <span class="pill-title">Trần B · Off <span>OFF</span></span>
+                        <span class="pill-meta">No assignment</span>
+                      </span>
+                    </div>
+                    <div class="week-cell">
+                      <span class="shift-pill status-morning">
+                        <span class="pill-title">Trần B · ICU <span>OK</span></span>
+                        <span class="pill-meta">Sáng · 06:00–14:00</span>
+                      </span>
+                      <span class="shift-pill status-leave">
+                        <span class="pill-title">Lê C · Leave <span>LV</span></span>
+                        <span class="pill-meta">Approved</span>
+                      </span>
+                    </div>
+                    <div class="week-cell">
+                      <span class="shift-pill status-morning">
+                        <span class="pill-title">Nguyễn A · ICU <span>OK</span></span>
+                        <span class="pill-meta">Sáng · 06:00–14:00</span>
+                      </span>
+                      <span class="shift-pill status-swap">
+                        <span class="pill-title">Trần B · Swap Pending <span>SW</span></span>
+                        <span class="pill-meta">Đang duyệt</span>
+                      </span>
+                    </div>
+                    <div class="week-cell">
+                      <span class="shift-pill status-off">
+                        <span class="pill-title">Nguyễn A · Off <span>OFF</span></span>
+                        <span class="pill-meta">No assignment</span>
+                      </span>
+                      <span class="shift-pill status-morning">
+                        <span class="pill-title">Lê C · ER <span>OK</span></span>
+                        <span class="pill-meta">Sáng · 06:00–14:00</span>
+                      </span>
+                    </div>
+                    <div class="week-cell">
+                      <span class="shift-pill status-morning">
+                        <span class="pill-title">Trần B · ICU <span>OK</span></span>
+                        <span class="pill-meta">Sáng · 06:00–14:00</span>
+                      </span>
+                      <span class="shift-pill status-rest">
+                        <span class="pill-title">Lê C · Nghỉ 24h <span>REST</span></span>
+                        <span class="pill-meta">Reset fatigue</span>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="week-row">
+                    <div class="week-label">
+                      Chiều
+                      <span class="muted">14:00–22:00</span>
+                    </div>
+                    <div class="week-cell">
+                      <span class="shift-pill status-afternoon">
+                        <span class="pill-title">Lê C · ER <span>OK</span></span>
+                        <span class="pill-meta">Chiều · 14:00–22:00</span>
+                      </span>
+                    </div>
+                    <div class="week-cell">
+                      <span class="shift-pill status-afternoon">
+                        <span class="pill-title">Nguyễn A · ER <span>OK</span></span>
+                        <span class="pill-meta">Chiều · 14:00–22:00</span>
+                      </span>
+                      <span class="shift-pill status-afternoon">
+                        <span class="pill-title">Trần B · ICU <span>OK</span></span>
+                        <span class="pill-meta">Chiều · 14:00–22:00</span>
+                      </span>
+                    </div>
+                    <div class="week-cell">
+                      <span class="shift-pill status-off">
+                        <span class="pill-title">Nguyễn A · Off <span>OFF</span></span>
+                        <span class="pill-meta">No assignment</span>
+                      </span>
+                      <span class="shift-pill status-afternoon">
+                        <span class="pill-title">Lê C · ICU <span>OK</span></span>
+                        <span class="pill-meta">Chiều · 14:00–22:00</span>
+                      </span>
+                    </div>
+                    <div class="week-cell">
+                      <span class="shift-pill status-afternoon">
+                        <span class="pill-title">Trần B · ER <span>OK</span></span>
+                        <span class="pill-meta">Chiều · 14:00–22:00</span>
+                      </span>
+                      <span class="shift-pill status-warning">
+                        <span class="pill-title">Lê C · Nghỉ 14h <span>WARN</span></span>
+                        <span class="pill-meta">HR-SCH-01 sát ngưỡng</span>
+                      </span>
+                    </div>
+                    <div class="week-cell">
+                      <span class="shift-pill status-afternoon">
+                        <span class="pill-title">Nguyễn A · ICU <span>OK</span></span>
+                        <span class="pill-meta">Chiều · 14:00–22:00</span>
+                      </span>
+                      <span class="shift-pill status-off">
+                        <span class="pill-title">Trần B · Off <span>OFF</span></span>
+                        <span class="pill-meta">No assignment</span>
+                      </span>
+                    </div>
+                    <div class="week-cell">
+                      <span class="shift-pill status-afternoon">
+                        <span class="pill-title">Lê C · ER <span>OK</span></span>
+                        <span class="pill-meta">Chiều · 14:00–22:00</span>
+                      </span>
+                    </div>
+                    <div class="week-cell">
+                      <span class="shift-pill status-afternoon">
+                        <span class="pill-title">Nguyễn A · ICU <span>OK</span></span>
+                        <span class="pill-meta">Chiều · 14:00–22:00</span>
+                      </span>
+                      <span class="shift-pill status-swap">
+                        <span class="pill-title">Lê C · Swap Offer <span>SW</span></span>
+                        <span class="pill-meta">Score 88%</span>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="week-row">
+                    <div class="week-label">
+                      Đêm
+                      <span class="muted">22:00–06:00</span>
+                    </div>
+                    <div class="week-cell">
+                      <span class="shift-pill status-night">
+                        <span class="pill-title">Trần B · ER <span>OK</span></span>
+                        <span class="pill-meta">Đêm · 22:00–06:00</span>
+                      </span>
+                      <span class="shift-pill status-danger">
+                        <span class="pill-title">Nguyễn A · Nghỉ 8h <span>WARN</span></span>
+                        <span class="pill-meta">HR-SCH-01 vi phạm</span>
+                      </span>
+                    </div>
+                    <div class="week-cell">
+                      <span class="shift-pill status-night">
+                        <span class="pill-title">Nguyễn A · ICU <span>OK</span></span>
+                        <span class="pill-meta">Đêm · 22:00–06:00</span>
+                      </span>
+                    </div>
+                    <div class="week-cell">
+                      <span class="shift-pill status-night">
+                        <span class="pill-title">Lê C · ICU <span>OK</span></span>
+                        <span class="pill-meta">Đêm · 22:00–06:00</span>
+                      </span>
+                      <span class="shift-pill status-rest">
+                        <span class="pill-title">Trần B · Nghỉ 12h <span>REST</span></span>
+                        <span class="pill-meta">Recovery</span>
+                      </span>
+                    </div>
+                    <div class="week-cell">
+                      <span class="shift-pill status-night">
+                        <span class="pill-title">Nguyễn A · ICU <span>OK</span></span>
+                        <span class="pill-meta">Đêm · 22:00–06:00</span>
+                      </span>
+                      <span class="shift-pill status-off">
+                        <span class="pill-title">Trần B · Off <span>OFF</span></span>
+                        <span class="pill-meta">No assignment</span>
+                      </span>
+                    </div>
+                    <div class="week-cell">
+                      <span class="shift-pill status-night">
+                        <span class="pill-title">Lê C · ICU <span>OK</span></span>
+                        <span class="pill-meta">Đêm · 22:00–06:00</span>
+                      </span>
+                    </div>
+                    <div class="week-cell">
+                      <span class="shift-pill status-rest">
+                        <span class="pill-title">Nguyễn A · Nghỉ 24h <span>REST</span></span>
+                        <span class="pill-meta">Reset fatigue</span>
+                      </span>
+                    </div>
+                    <div class="week-cell">
+                      <span class="shift-pill status-night">
+                        <span class="pill-title">Trần B · ER <span>OK</span></span>
+                        <span class="pill-meta">Đêm · 22:00–06:00</span>
+                      </span>
+                      <span class="shift-pill status-leave">
+                        <span class="pill-title">Lê C · Leave <span>LV</span></span>
+                        <span class="pill-meta">Approved</span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="banner warning">⚠️ HR-SCH-01: nghỉ tối thiểu 12h bị vi phạm ở 2 ca.</div>
+            </div>
+            <div class="state state-validated">
+              <div class="card-header">
+                <p class="card-title">Lịch trực tuần (Validated)</p>
+                <span class="badge success">Ready</span>
+              </div>
+              <div class="banner success">✅ Không còn Hard Rules. Có thể Publish.</div>
+            </div>
+            <div class="state state-blocked">
+              <div class="card-header">
+                <p class="card-title">Lịch trực tuần (Blocked)</p>
+                <span class="badge danger">Publish Locked</span>
+              </div>
+              <div class="banner danger">🚫 HR-SCH-03: Ca trùng giờ cho BS C. Drag & drop bị từ chối.</div>
+            </div>
+          </div>
+
+          <div class="grid two">
+            <div class="card">
+              <div class="card-header">
+                <p class="card-title">Staffing Coverage Table</p>
+                <span class="badge warning">2 under-staffed</span>
+              </div>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Ca</th>
+                    <th>Min</th>
+                    <th>Assigned</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Ca Đêm 03/06</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td><span class="badge warning">Thiếu 1</span></td>
+                  </tr>
+                  <tr>
+                    <td>Ca Sáng 04/06</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td><span class="badge success">Đủ</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <p class="card-title">Audit Trail</p>
+                <span class="badge info">Last 24h</span>
+              </div>
+              <ul class="list">
+                <li>📝 09:15 — Drag & drop BS A vào Ca Sáng 04/06</li>
+                <li>⚠️ 09:18 — Warning SR-SCH-02: BS A &gt; 48h/tuần</li>
+                <li>🚫 09:20 — Block HR-SCH-03: Overlap detected</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="screen" id="mg-03">
+          <div class="screen-header">
+            <div>
+              <p class="screen-kicker">Manager · MG-03</p>
+              <h2>Approval Workflow</h2>
+              <p class="screen-subtitle">Danh sách, filter tabs, batch actions, Impact Analysis drawer.</p>
+            </div>
+            <div class="screen-actions">
+              <button type="button" class="chip" data-action="open-drawer" data-target="impact-drawer">
+                Open Impact Drawer
+              </button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="tabs">
+              <button type="button" class="tab is-active">Tất cả</button>
+              <button type="button" class="tab">Chờ duyệt <span class="badge danger">12</span></button>
+              <button type="button" class="tab">Đã duyệt</button>
+              <button type="button" class="tab">Từ chối</button>
+            </div>
+            <div class="batch-bar">
+              <span>Đã chọn 2 yêu cầu</span>
+              <div>
+                <button type="button" class="chip">Duyệt tất cả</button>
+                <button type="button" class="ghost">Từ chối tất cả</button>
+              </div>
+            </div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Người yêu cầu</th>
+                  <th>Loại</th>
+                  <th>Ca gốc</th>
+                  <th>Đích</th>
+                  <th>Trạng thái</th>
+                  <th>Ngày tạo</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><input type="checkbox" checked /></td>
+                  <td>Nguyễn A · Nội khoa</td>
+                  <td><span class="badge info">Swap</span></td>
+                  <td>Đêm 02/06</td>
+                  <td>BS Trần B · Sáng 03/06</td>
+                  <td>Chờ duyệt</td>
+                  <td>2 giờ trước</td>
+                  <td>
+                    <button type="button" class="ghost" data-action="open-drawer" data-target="impact-drawer">
+                      Xem
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" /></td>
+                  <td>Lê C · ICU</td>
+                  <td><span class="badge warning">Leave</span></td>
+                  <td>05/06</td>
+                  <td>—</td>
+                  <td>Chờ duyệt</td>
+                  <td>1 ngày trước</td>
+                  <td><button type="button" class="ghost">Xem</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="screen" id="sa-01">
+          <div class="screen-header">
+            <div>
+              <p class="screen-kicker">Super Admin · SA-01</p>
+              <h2>Quản lý Bệnh viện (Tenants)</h2>
+              <p class="screen-subtitle">Search, filter, tenants table, create/edit modal, detail drawer.</p>
+            </div>
+            <div class="screen-actions">
+              <button type="button" class="cta" data-action="open-modal" data-target="tenant-modal">+ Tạo BV mới</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="search-filter">
+              <input type="text" placeholder="Tìm kiếm tên/mã BV..." />
+              <select>
+                <option>Tất cả</option>
+                <option>Active</option>
+                <option>Inactive</option>
+              </select>
+              <button type="button" class="ghost">Lọc</button>
+            </div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>STT</th>
+                  <th>Tên BV</th>
+                  <th>Mã BV</th>
+                  <th>Email Admin</th>
+                  <th>Ngày tạo</th>
+                  <th>Trạng thái</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Bệnh viện Bạch Mai</td>
+                  <td>BACH_MAI</td>
+                  <td>admin@bachmai.vn</td>
+                  <td>15/01/2026</td>
+                  <td><span class="badge success">Active</span></td>
+                  <td>
+                    <button type="button" class="ghost" data-action="open-drawer" data-target="tenant-drawer">Xem</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Bệnh viện B</td>
+                  <td>BVB002</td>
+                  <td>b@bv.com</td>
+                  <td>02/01/2026</td>
+                  <td><span class="badge danger">Inactive</span></td>
+                  <td><button type="button" class="ghost">Xem</button></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="pagination">
+              <button type="button" class="ghost">‹</button>
+              <button type="button" class="chip is-active">1</button>
+              <button type="button" class="chip">2</button>
+              <button type="button" class="chip">3</button>
+              <button type="button" class="ghost">›</button>
+              <span class="muted">Showing 1-10 of 42</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="screen" id="sys-01">
+          <div class="screen-header">
+            <div>
+              <p class="screen-kicker">System · SYS-01</p>
+              <h2>Rule Engine & Policy Definition — Core Logic</h2>
+              <p class="screen-subtitle">
+                Evaluation pipeline, rule taxonomy, tenant config, burnout & fairness definitions.
+              </p>
+            </div>
+            <div class="screen-actions">
+              <button type="button" class="chip" data-state-group="sys01-view" data-state="hard">Hard Rules</button>
+              <button type="button" class="chip" data-state-group="sys01-view" data-state="soft">Soft Rules</button>
+              <button type="button" class="chip" data-state-group="sys01-view" data-state="policy">Policy Rules</button>
+            </div>
+          </div>
+
+          <div class="grid three">
+            <div class="card">
+              <div class="card-header">
+                <p class="card-title">Rule Categories</p>
+                <span class="badge info">Chain of Responsibility</span>
+              </div>
+              <ul class="list">
+                <li>🚫 Hard Rules: BLOCK actions</li>
+                <li>💡 Soft Rules: Warning + confirm</li>
+                <li>📋 Policy Rules: Audit + dashboard</li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <p class="card-title">Evaluation Pipeline</p>
+                <span class="badge warning">HR → SR → PR</span>
+              </div>
+              <div class="timeline">
+                <span>Input</span>
+                <span>Hard</span>
+                <span>Soft</span>
+                <span>Policy</span>
+                <span>Result</span>
+              </div>
+              <p class="muted">Stop early on Hard Rule violation.</p>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <p class="card-title">Rule Config (Tenant)</p>
+                <span class="badge warning">Editable</span>
+              </div>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Param</th>
+                    <th>Value</th>
+                    <th>Rule</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>min_rest_hours</td>
+                    <td>12</td>
+                    <td>HR-SCH-01</td>
+                  </tr>
+                  <tr>
+                    <td>fairness_target_pct</td>
+                    <td>85</td>
+                    <td>PR-FAR-01</td>
+                  </tr>
+                  <tr>
+                    <td>swap_expire_hours</td>
+                    <td>72</td>
+                    <td>HR-APR-08</td>
+                  </tr>
+                  <tr>
+                    <td>burnout_night_threshold</td>
+                    <td>2</td>
+                    <td>SR-SCH-01</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="grid two">
+            <div class="card state-group" data-state-group="sys01-view">
+              <div class="state state-hard is-active">
+                <div class="card-header">
+                  <p class="card-title">Hard Rules (BLOCK)</p>
+                  <span class="badge danger">Critical</span>
+                </div>
+                <ul class="list">
+                  <li>HR-SCH-01: Min Rest ≥ 12h</li>
+                  <li>HR-SCH-02: Max 3 night shifts consecutive</li>
+                  <li>HR-SWP-02: Rest gap ≥ 12h when swap</li>
+                  <li>HR-APR-07: Reject requires reason</li>
+                </ul>
+              </div>
+              <div class="state state-soft">
+                <div class="card-header">
+                  <p class="card-title">Soft Rules (WARN)</p>
+                  <span class="badge warning">Override allowed</span>
+                </div>
+                <ul class="list">
+                  <li>SR-SCH-01: Max 2 night shifts / week</li>
+                  <li>SR-SCH-02: &gt; 48h/week warning</li>
+                  <li>SR-APR-01: Urgent requests first</li>
+                </ul>
+              </div>
+              <div class="state state-policy">
+                <div class="card-header">
+                  <p class="card-title">Policy Rules (LOG)</p>
+                  <span class="badge info">Compliance</span>
+                </div>
+                <ul class="list">
+                  <li>PR-FAR-01: Fairness target 85%</li>
+                  <li>PR-CMP-01: 48h/week labor law</li>
+                  <li>PR-CMP-03: Compensatory leave</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <p class="card-title">Burnout Thresholds</p>
+                <span class="badge danger">Critical</span>
+              </div>
+              <div class="grid three">
+                <div class="stat">
+                  <p>Night shifts / week</p>
+                  <h4>&gt; 2</h4>
+                </div>
+                <div class="stat">
+                  <p>Rest gap</p>
+                  <h4>&lt; 12h</h4>
+                </div>
+                <div class="stat">
+                  <p>Hours / week</p>
+                  <h4>&gt; 48h</h4>
+                </div>
+              </div>
+              <div class="banner danger">CRITICAL → block publish + alert manager</div>
+            </div>
+          </div>
+
+          <div class="grid two">
+            <div class="card">
+              <div class="card-header">
+                <p class="card-title">Fairness Score Formula</p>
+                <span class="badge success">Real-time</span>
+              </div>
+              <pre class="code-block">Fairness Score = (1 - σ/μ) × 100%
+σ = stddev(total_hours)
+μ = mean(total_hours)</pre>
+              <div class="progress">
+                <span style="width: 87%"></span>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <p class="card-title">Evaluate API Example</p>
+                <span class="badge danger">Hard violations</span>
+              </div>
+              <pre class="code-block">POST /api/v1/rules/evaluate
+{
+  "action": "ASSIGN_SHIFT",
+  "context": {
+    "user_id": "usr-001",
+    "shift_id": "shift-night-01",
+    "date": "2026-06-15"
+  }
+}
+// Response
+{
+  "valid": false,
+  "hard_violations": [
+    { "rule_id": "HR-SCH-01", "message": "Rest gap &lt; 12h" }
+  ],
+  "burnout_level": "WARNING",
+  "fairness_impact": { "before": 87.5, "after": 82.1 }
+}</pre>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <p class="card-title">Audit Trail & Access Control</p>
+              <span class="badge info">RBAC</span>
+            </div>
+            <div class="grid two">
+              <ul class="list">
+                <li>Schedule Published → audit log (5 years)</li>
+                <li>Swap Approved/Rejected → snapshot impact</li>
+                <li>Rule Override → justification required</li>
+              </ul>
+              <ul class="list">
+                <li>Super Admin: view + configure all rules</li>
+                <li>Manager: configure soft/policy only</li>
+                <li>Staff: view own burnout metrics</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="modal" id="leave-modal" aria-hidden="true">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Xin nghỉ phép</h3>
+          <button type="button" class="ghost" data-action="close-modal">✕</button>
+        </div>
+        <div class="field">
+          <label>Loại nghỉ phép</label>
+          <select>
+            <option>ANNUAL</option>
+            <option>SICK</option>
+            <option>EMERGENCY</option>
+            <option>TRAINING</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Ngày nghỉ</label>
+          <input type="date" />
+        </div>
+        <div class="field">
+          <label>Lý do</label>
+          <textarea placeholder="Nhập lý do nghỉ..."></textarea>
+        </div>
+        <div class="banner warning">⚠️ HR-LEA-03: Nghỉ phép năm cần đăng ký trước 3 ngày.</div>
+        <div class="modal-actions">
+          <button type="button" class="ghost" data-action="close-modal">Hủy</button>
+          <button type="button" class="cta">Gửi yêu cầu</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="tenant-modal" aria-hidden="true">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Tạo Bệnh viện mới</h3>
+          <button type="button" class="ghost" data-action="close-modal">✕</button>
+        </div>
+        <div class="field">
+          <label>Tên bệnh viện</label>
+          <input type="text" placeholder="VD: Bệnh viện Đa khoa" />
+        </div>
+        <div class="field">
+          <label>Mã định danh</label>
+          <input type="text" placeholder="BVDKTW_01" />
+          <span class="helper">Chỉ chữ IN HOA, số và dấu gạch dưới</span>
+        </div>
+        <div class="field">
+          <label>Email Admin</label>
+          <input type="email" placeholder="admin@benhvien.vn" />
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="ghost" data-action="close-modal">Hủy</button>
+          <button type="button" class="cta">Tạo bệnh viện</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="drawer" id="tenant-drawer" aria-hidden="true">
+      <div class="drawer-content">
+        <div class="drawer-header">
+          <h3>Chi tiết Bệnh viện</h3>
+          <button type="button" class="ghost" data-action="close-drawer">✕</button>
+        </div>
+        <div class="drawer-body">
+          <p><strong>Tên BV:</strong> Bệnh viện Bạch Mai</p>
+          <p><strong>Mã:</strong> BACH_MAI</p>
+          <p><strong>Email Admin:</strong> admin@bachmai.vn</p>
+          <p><strong>Ngày tạo:</strong> 15/01/2026</p>
+          <p><strong>Trạng thái:</strong> <span class="badge success">Active</span></p>
+          <div class="stats-row">
+            <div class="stat">
+              <p>Tổng Users</p>
+              <h4>45</h4>
+            </div>
+            <div class="stat">
+              <p>Managers</p>
+              <h4>3</h4>
+            </div>
+            <div class="stat">
+              <p>Staff</p>
+              <h4>42</h4>
+            </div>
+          </div>
+        </div>
+        <div class="drawer-actions">
+          <button type="button" class="ghost">Chỉnh sửa</button>
+          <button type="button" class="danger" data-action="open-modal" data-target="confirm-modal">
+            Deactivate BV
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="drawer" id="impact-drawer" aria-hidden="true">
+      <div class="drawer-content wide">
+        <div class="drawer-header">
+          <h3>Impact Analysis</h3>
+          <button type="button" class="ghost" data-action="close-drawer">✕</button>
+        </div>
+        <div class="drawer-body">
+          <div class="grid two">
+            <div class="card">
+              <p class="card-title">Before / After</p>
+              <table class="table">
+                <thead>
+                  <tr><th></th><th>Requester</th><th>Target</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Trước</td><td>42h</td><td>36h</td></tr>
+                  <tr><td>Sau</td><td>38h</td><td>40h</td></tr>
+                </tbody>
+              </table>
+              <div class="banner success">Fairness +4%</div>
+            </div>
+            <div class="card">
+              <p class="card-title">Rule Violations</p>
+              <div class="rule-list">
+                <span class="badge warning">SR-APR-01: Gấp</span>
+                <span class="badge danger">HR-SWP-02: Rest gap &lt; 12h</span>
+              </div>
+              <div class="banner danger">Duyệt bị khóa do Hard Rule.</div>
+            </div>
+          </div>
+          <div class="card">
+            <p class="card-title">Burnout Assessment</p>
+            <div class="burnout">
+              <span class="badge success">Requester · NORMAL</span>
+              <span class="badge warning">Target · WARNING</span>
+            </div>
+          </div>
+          <div class="card">
+            <p class="card-title">Timeline</p>
+            <div class="timeline">
+              <span>02/06 Đêm</span>
+              <span>→</span>
+              <span>03/06 Sáng</span>
+            </div>
+          </div>
+          <div class="field">
+            <label>Lý do từ chối</label>
+            <textarea placeholder="Bắt buộc khi từ chối"></textarea>
+          </div>
+        </div>
+        <div class="drawer-actions">
+          <button type="button" class="ghost">Từ chối</button>
+          <button type="button" class="cta" disabled>Duyệt</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="confirm-modal" aria-hidden="true">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>⚠️ Xác nhận Deactivate</h3>
+          <button type="button" class="ghost" data-action="close-modal">✕</button>
+        </div>
+        <p>Bệnh viện đang có 12 lịch trực Published. Deactivate sẽ ảnh hưởng dữ liệu.</p>
+        <label class="checkbox">
+          <input type="checkbox" /> Tôi hiểu ảnh hưởng
+        </label>
+        <div class="modal-actions">
+          <button type="button" class="ghost" data-action="close-modal">Hủy</button>
+          <button type="button" class="danger">Xác nhận Deactivate</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="popover" id="shift-popover" aria-hidden="true">
+      <div class="popover-content">
+        <h4>Ca Sáng · 15/06/2026</h4>
+        <p>07:00 – 15:00</p>
+        <div class="avatars">
+          <span class="avatar">NA</span>
+          <span class="avatar">TB</span>
+          <span class="avatar">LC</span>
+          <span class="avatar">+2</span>
+        </div>
+        <button type="button" class="cta ghost">Xin đổi ca này</button>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
