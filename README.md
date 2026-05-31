@@ -80,20 +80,24 @@ docker compose up --build -d
 |---------|---------|
 | PostgreSQL | `localhost:5432` (user/pass/db: `rotaguard`) |
 | Backend | http://localhost:8080 |
-| Giao diện | http://localhost:5173 |
+| Giao diện RotaGuard (React) | http://localhost:5173 |
+| **UI mới (prototype Hospia)** | http://localhost:5500 — `./dev.sh prototype` |
 | Swagger | http://localhost:8080/swagger-ui.html |
 
 ### Lệnh `dev.sh`
 
 ```bash
+./dev.sh prototype   # UI mới: specs PTIT-OOP (HTML tĩnh, không cần BE)
 ./dev.sh docker      # postgres + be + fe (nền)
 ./dev.sh postgres    # chỉ database
 ./dev.sh be          # postgres + backend (gradlew bootRun)
-./dev.sh fe          # postgres + be container + vite dev (UI local)
+./dev.sh fe          # postgres + be container + vite dev (UI React)
 ./dev.sh health      # kiểm tra API health
 ./dev.sh build       # spotlessApply + build backend
 ./dev.sh up          # docker compose foreground (build + log)
 ```
+
+**UI mới** (`docs/PTIT-OOP/prototype/`): demo ST/MG/SA theo spec — sidebar chuyển màn, đổi theme, modal; **không** gọi API RotaGuard.
 
 ### Dev từng phần
 

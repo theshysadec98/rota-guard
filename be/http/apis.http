@@ -66,6 +66,12 @@ Content-Type: application/json
 ### Shifts list (demo week)
 GET {{baseUrl}}/shifts?weekStart={{demoWeek}}
 
+### Week board (3x7 grid)
+GET {{baseUrl}}/shifts/week-board?weekStart={{demoWeek}}
+
+### Delete single shift
+DELETE {{baseUrl}}/shifts/1
+
 ### Shifts import JSON (+07:00)
 POST {{baseUrl}}/shifts/import
 Content-Type: application/json

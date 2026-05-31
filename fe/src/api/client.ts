@@ -65,10 +65,19 @@ export const api = {
   },
   shifts: (weekStart: string) =>
     request<import('../types').Shift[]>(`/shifts?weekStart=${weekStart}`),
+  weekBoard: (weekStart: string) =>
+    request<import('../types').WeekBoard>(`/shifts/week-board?weekStart=${weekStart}`),
+  deleteShift: (shiftId: number) =>
+    fetch(`${API_BASE}/shifts/${shiftId}`, { method: 'DELETE' }).then((res) => {
+      if (!res.ok) {
+        throw new Error(res.statusText);
+      }
+    }),
   importShifts: (body: {
     weekStart: string;
     replaceWeek: boolean;
     shifts: {
+      id?: number;
       staffId: number;
       startAt: string;
       endAt: string;
@@ -81,6 +90,7 @@ export const api = {
         weekStart: body.weekStart,
         replaceWeek: body.replaceWeek,
         shifts: body.shifts.map((s) => ({
+          ...(s.id != null ? { id: s.id } : {}),
           staffId: s.staffId,
           startAt: s.startAt,
           endAt: s.endAt,

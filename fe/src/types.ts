@@ -173,4 +173,39 @@ export interface RosterSuggestionResponse {
   warning?: string;
 }
 
+export type SlotKind = 'MORNING' | 'AFTERNOON' | 'NIGHT';
+
+export interface BoardShiftCard {
+  shiftId: number;
+  staffId: number;
+  staffName: string;
+  department: string;
+  role: string;
+  startAt: string;
+  endAt: string;
+  shiftType: string;
+  slot: SlotKind;
+  revisionCount: number;
+  warnings: string[];
+}
+
+export interface WeekBoardDay {
+  date: string;
+  label: string;
+  cells: Record<SlotKind, BoardShiftCard[]>;
+}
+
+export interface WeekBoardSummary {
+  totalShifts: number;
+  staffCount: number;
+}
+
+export interface WeekBoard {
+  weekStart: string;
+  weekEnd: string;
+  slots: SlotKind[];
+  days: WeekBoardDay[];
+  summary: WeekBoardSummary;
+}
+
 export type WizardStep = 1 | 2 | 3;

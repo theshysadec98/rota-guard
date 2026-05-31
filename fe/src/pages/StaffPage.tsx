@@ -21,12 +21,18 @@ export function StaffPage({ onNext, onStaffChange }: Props) {
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [roleFilter, setRoleFilter] = useState<string>('');
 
   const load = useCallback(async () => {
-    const page = await api.staff({ size: 500, sort: 'name', dir: 'asc' });
+    const page = await api.staff({
+      size: 500,
+      sort: 'name',
+      dir: 'asc',
+      ...(roleFilter ? { role: roleFilter } : {}),
+    });
     setStaff(page.items);
     onStaffChange(page.items.length);
-  }, [onStaffChange]);
+  }, [onStaffChange, roleFilter]);
 
   useEffect(() => {
     load().catch((e) => setError(String(e)));
@@ -99,6 +105,20 @@ export function StaffPage({ onNext, onStaffChange }: Props) {
 
       {message && <div className="toast success">{message}</div>}
       {error && <div className="error">{error}</div>}
+
+      <div className="toolbar" style={{ marginBottom: '0.75rem' }}>
+        <label>
+          Lọc vai trò
+          <select
+            value={roleFilter}
+            onChange={(e) => setRoleFilter(e.target.value)}
+          >
+            <option value="">Tất cả</option>
+            <option value="DOCTOR">Bác sĩ (DOCTOR)</option>
+            <option value="NURSE">Y tá (NURSE)</option>
+          </select>
+        </label>
+      </div>
 
       <form className="toolbar" onSubmit={onSubmit} style={{ marginBottom: '1rem' }}>
         <label>

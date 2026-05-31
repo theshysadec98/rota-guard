@@ -287,3 +287,209 @@ tr.selected {
 .diff-row-worse {
   background: color-mix(in srgb, var(--red) 8%, transparent);
 }
+
+.board-kpi {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.kpi-tile {
+  flex: 1;
+  min-width: 120px;
+  padding: 0.75rem 1rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.kpi-value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.kpi-label {
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.board-layout {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+@media (max-width: 1000px) {
+  .board-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.week-grid-wrap {
+  overflow-x: auto;
+}
+
+.week-grid {
+  width: 100%;
+  min-width: 720px;
+  font-size: 0.8rem;
+}
+
+.week-grid th,
+.week-grid td {
+  vertical-align: top;
+  padding: 0.35rem;
+}
+
+.week-grid .slot-col {
+  width: 4.5rem;
+  background: var(--bg);
+  font-weight: 600;
+}
+
+.week-grid thead th {
+  text-align: center;
+}
+
+.day-date {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.slot-row.slot-morning th.slot-col {
+  color: #fbbf24;
+}
+
+.slot-row.slot-afternoon th.slot-col {
+  color: #38bdf8;
+}
+
+.slot-row.slot-night th.slot-col {
+  color: #a78bfa;
+}
+
+.cell-cards {
+  min-height: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.shift-card {
+  padding: 0.4rem 0.5rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  font-size: 0.75rem;
+}
+
+.shift-card.role-doctor {
+  border-left: 3px solid #38bdf8;
+}
+
+.shift-card.role-nurse {
+  border-left: 3px solid #22c55e;
+}
+
+.shift-meta {
+  display: block;
+  color: var(--muted);
+  font-size: 0.65rem;
+}
+
+.card-actions {
+  display: flex;
+  gap: 0.25rem;
+  margin-top: 0.35rem;
+}
+
+.card-btn {
+  padding: 0.2rem 0.4rem !important;
+  font-size: 0.65rem !important;
+}
+
+.cell-add {
+  width: 100%;
+  padding: 0.25rem !important;
+  font-size: 1rem !important;
+  line-height: 1;
+}
+
+.board-side {
+  padding: 0.75rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.board-side h3 {
+  margin: 0 0 0.5rem;
+  font-size: 0.9rem;
+}
+
+.upcoming-list {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: 0.8rem;
+}
+
+.side-note {
+  margin-top: 1rem;
+  font-size: 0.75rem;
+}
+
+.sample-link {
+  align-self: center;
+  color: var(--accent);
+  font-size: 0.85rem;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 1rem;
+}
+
+.modal-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.25rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.modal-panel h3 {
+  margin: 0 0 0.5rem;
+}
+
+.modal-panel form label {
+  width: 100%;
+  margin-top: 0.75rem;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.week-grid tbody tr {
+  cursor: default;
+}
+
+.week-grid tbody tr:hover {
+  background: transparent;
+}

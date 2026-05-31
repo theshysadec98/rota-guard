@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { api } from './api/client';
 import { AnalysisPage } from './pages/AnalysisPage';
-import { RosterPage } from './pages/RosterPage';
+import { ScheduleBoardPage } from './pages/ScheduleBoardPage';
 import { StaffPage } from './pages/StaffPage';
 import type { WizardStep } from './types';
 import { toMonday } from './utils/week';
@@ -64,7 +64,7 @@ export default function App() {
         <StaffPage onNext={() => setStep(2)} onStaffChange={setStaffCount} />
       )}
       {step === 2 && (
-        <RosterPage
+        <ScheduleBoardPage
           weekStart={weekStart}
           onWeekStartChange={setWeekStart}
           onNext={() => setStep(3)}

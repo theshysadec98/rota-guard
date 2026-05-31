@@ -177,6 +177,16 @@ public class ShiftService {
   }
 
   @Transactional
+  public void deleteShift(Long shiftId) {
+    Shift shift =
+        shiftRepository
+            .findById(shiftId)
+            .orElseThrow(() -> new IllegalArgumentException("Shift not found: " + shiftId));
+    shiftRevisionRepository.deleteByShiftIdIn(List.of(shift.getId()));
+    shiftRepository.delete(shift);
+  }
+
+  @Transactional
   public Shift reassign(Long shiftId, Long newStaffId) {
     Shift shift =
         shiftRepository

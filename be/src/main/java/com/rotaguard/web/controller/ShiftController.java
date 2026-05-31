@@ -3,6 +3,7 @@ package com.rotaguard.web.controller;
 
 import com.rotaguard.repository.ShiftRepository;
 import com.rotaguard.service.ShiftService;
+import com.rotaguard.service.WeekBoardService;
 import com.rotaguard.support.AppTimeZones;
 import com.rotaguard.support.WeekUtils;
 import com.rotaguard.web.mapper.WebMapper;
@@ -10,6 +11,7 @@ import com.rotaguard.web.request.ImportShiftsRequest;
 import com.rotaguard.web.request.ReassignShiftRequest;
 import com.rotaguard.web.response.ShiftImportResponse;
 import com.rotaguard.web.response.ShiftResponse;
+import com.rotaguard.web.response.WeekBoardResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -23,6 +25,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,6 +45,14 @@ public class ShiftController {
 
   private final ShiftRepository shiftRepository;
   private final ShiftService shiftService;
+  private final WeekBoardService weekBoardService;
+
+  @Operation(summary = "Week schedule board (3 slots x 7 days)")
+  @GetMapping("/week-board")
+  public WeekBoardResponse weekBoard(
+      @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @NotNull LocalDate weekStart) {
+    return weekBoardService.buildBoard(weekStart);
+  }
 
   @Operation(summary = "List shifts for ISO week starting weekStart")
   @GetMapping
@@ -67,6 +78,13 @@ public class ShiftController {
   public ShiftResponse reassign(
       @PathVariable Long id, @Valid @RequestBody ReassignShiftRequest request) {
     return WebMapper.toShiftResponse(shiftService.reassign(id, request.getNewStaffId()));
+  }
+
+  @Operation(summary = "Delete a single shift and its revisions")
+  @DeleteMapping("/{id}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void deleteShift(@PathVariable Long id) {
+    shiftService.deleteShift(id);
   }
 
   @Operation(summary = "Import shifts from CSV file")
