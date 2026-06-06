@@ -1,9 +1,9 @@
 /* By Ly Minh Hoang */
-package com.rotaguard.jdbc;
+package com.staffmanager.jdbc;
 
-import com.rotaguard.jdbc.db.SchemaInitializer;
-import com.rotaguard.jdbc.db.StaffDao;
-import com.rotaguard.jdbc.ui.StaffFrame;
+import com.staffmanager.jdbc.db.SchemaInitializer;
+import com.staffmanager.jdbc.db.StaffDao;
+import com.staffmanager.jdbc.ui.StaffFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 

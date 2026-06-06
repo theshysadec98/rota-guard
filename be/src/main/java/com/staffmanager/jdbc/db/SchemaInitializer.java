@@ -1,5 +1,5 @@
 /* By Ly Minh Hoang */
-package com.rotaguard.jdbc.db;
+package com.staffmanager.jdbc.db;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

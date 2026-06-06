@@ -1,7 +1,7 @@
 /* By Ly Minh Hoang */
-package com.rotaguard.jdbc.db;
+package com.staffmanager.jdbc.db;
 
-import com.rotaguard.jdbc.model.Staff;
+import com.staffmanager.jdbc.model.Staff;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

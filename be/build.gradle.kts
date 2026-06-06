@@ -4,7 +4,7 @@ plugins {
     id("com.diffplug.spotless") version "6.25.0"
 }
 
-group = "com.rotaguard"
+group = "com.staffmanager"
 version = "0.1.0"
 
 java {
@@ -14,7 +14,7 @@ java {
 }
 
 application {
-    mainClass.set("com.rotaguard.jdbc.Main")
+    mainClass.set("com.staffmanager.jdbc.Main")
 }
 
 repositories {

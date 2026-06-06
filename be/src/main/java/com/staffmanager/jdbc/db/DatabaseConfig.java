@@ -1,5 +1,5 @@
 /* By Ly Minh Hoang */
-package com.rotaguard.jdbc.db;
+package com.staffmanager.jdbc.db;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,15 +31,15 @@ public final class DatabaseConfig {
   }
 
   private static String getUrl() {
-    return readValue("ROTAGUARD_DB_URL", "db.url");
+    return readValue("STAFF_MANAGER_DB_URL", "db.url");
   }
 
   private static String getUsername() {
-    return readValue("ROTAGUARD_DB_USERNAME", "db.username");
+    return readValue("STAFF_MANAGER_DB_USERNAME", "db.username");
   }
 
   private static String getPassword() {
-    return readValue("ROTAGUARD_DB_PASSWORD", "db.password");
+    return readValue("STAFF_MANAGER_DB_PASSWORD", "db.password");
   }
 
   private static String readValue(String envKey, String propertyKey) {

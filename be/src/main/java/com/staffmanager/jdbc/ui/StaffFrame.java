@@ -1,8 +1,8 @@
 /* By Ly Minh Hoang */
-package com.rotaguard.jdbc.ui;
+package com.staffmanager.jdbc.ui;
 
-import com.rotaguard.jdbc.db.StaffDao;
-import com.rotaguard.jdbc.model.Staff;
+import com.staffmanager.jdbc.db.StaffDao;
+import com.staffmanager.jdbc.model.Staff;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -50,7 +50,7 @@ public class StaffFrame extends JFrame {
 
   public StaffFrame(StaffDao staffDao) {
     this.staffDao = staffDao;
-    setTitle("RotaGuard - Quan ly nhan su JDBC");
+    setTitle("Staff Manager");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setLayout(new BorderLayout(12, 12));
     setMinimumSize(new Dimension(1100, 620));

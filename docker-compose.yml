@@ -1,19 +1,19 @@
-name: rota-guard
+name: staff-manager
 
 services:
   mysql:
     image: mysql:8.4
     environment:
-      MYSQL_DATABASE: rotaguard
-      MYSQL_USER: rotaguard
-      MYSQL_PASSWORD: rotaguard
-      MYSQL_ROOT_PASSWORD: rotaguard_root
+      MYSQL_DATABASE: staffmanager
+      MYSQL_USER: staffmanager
+      MYSQL_PASSWORD: staffmanager
+      MYSQL_ROOT_PASSWORD: staffmanager_root
     ports:
       - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
     healthcheck:
-      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -protaguard_root"]
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -pstaffmanager_root"]
       interval: 5s
       timeout: 5s
       retries: 20

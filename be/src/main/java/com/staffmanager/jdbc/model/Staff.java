@@ -1,5 +1,5 @@
 /* By Ly Minh Hoang */
-package com.rotaguard.jdbc.model;
+package com.staffmanager.jdbc.model;
 
 public class Staff {
   private String maNv;

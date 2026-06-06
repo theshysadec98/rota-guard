@@ -1,10 +1,10 @@
-# RotaGuard — Ghi chú kỹ thuật
+# Staff Manager — Ghi chú kỹ thuật
 
 ## Tổng quan
 
 | Hạng mục | Giá trị |
 |----------|---------|
-| Tên dự án | RotaGuard |
+| Tên dự án | Staff Manager |
 | Phiên bản | `0.1.0` |
 | Kiến trúc | Ứng dụng desktop Java trong `be/`, cơ sở dữ liệu MySQL |
 
@@ -20,12 +20,12 @@
 | Cơ sở dữ liệu | MySQL 8 |
 | Format mã | Spotless `6.25.0` + Google Java Format `1.22.0` |
 
-Package mã nguồn: `com.rotaguard.jdbc`
+Package mã nguồn: `com.staffmanager.jdbc`
 
 ## Cấu trúc mã nguồn
 
 ```text
-be/src/main/java/com/rotaguard/jdbc/
+be/src/main/java/com/staffmanager/jdbc/
 ├── Main.java
 ├── db/
 │   ├── DatabaseConfig.java
@@ -44,8 +44,8 @@ be/src/main/java/com/rotaguard/jdbc/
 | Bảng duy nhất | `staff` |
 | Schema | `be/sql/schema.sql` |
 | Cấu hình DB | `be/src/main/resources/db.properties` |
-| Kết nối mặc định | `jdbc:mysql://localhost:3306/rotaguard` |
-| User / password | `rotaguard` / `rotaguard` |
+| Kết nối mặc định | `jdbc:mysql://localhost:3306/staffmanager` |
+| User / password | `staffmanager` / `staffmanager` |
 
 ## Script chạy
 

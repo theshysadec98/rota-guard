@@ -1,1 +1,1 @@
-rootProject.name = "rota-guard-jdbc"
+rootProject.name = "staff-manager-jdbc"
