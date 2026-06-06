@@ -18,7 +18,7 @@ EOF
 
 wait_for_mysql() {
   echo "Đang chờ MySQL khởi động..."
-  until docker compose exec -T mysql mysqladmin ping -h localhost -uroot -pstaffmanager_root >/dev/null 2>&1; do
+  until docker compose exec -T mysql mysqladmin ping -h localhost -uroot >/dev/null 2>&1; do
     sleep 1
   done
   echo "MySQL đã sẵn sàng."
@@ -30,13 +30,13 @@ start_project() {
   wait_for_mysql
 
   echo "Đang nạp dữ liệu mẫu..."
-  docker compose exec -T mysql mysql -ustaffmanager -pstaffmanager staffmanager < "$ROOT/be/sql/schema.sql"
+  docker compose exec -T mysql mysql -uroot staffmanager < "$ROOT/be/sql/schema.sql"
 
   echo "Đang mở ứng dụng desktop..."
   cd "$ROOT/be"
   export STAFF_MANAGER_DB_URL="jdbc:mysql://127.0.0.1:3307/staffmanager?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Ho_Chi_Minh"
-  export STAFF_MANAGER_DB_USERNAME="staffmanager"
-  export STAFF_MANAGER_DB_PASSWORD="staffmanager"
+  export STAFF_MANAGER_DB_USERNAME="root"
+  export STAFF_MANAGER_DB_PASSWORD=""
   ./gradlew run
 }
 

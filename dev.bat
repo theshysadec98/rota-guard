@@ -18,7 +18,7 @@ goto help
 
 :wait_mysql_docker
 echo Dang cho MySQL Docker khoi dong...
-docker compose exec -T mysql mysqladmin ping -h localhost -uroot -pstaffmanager_root >nul 2>&1
+docker compose exec -T mysql mysqladmin ping -h localhost -uroot >nul 2>&1
 if errorlevel 1 (
   timeout /t 1 /nobreak >nul
   goto wait_mysql_docker
@@ -55,12 +55,12 @@ if errorlevel 1 exit /b 1
 
 call :wait_mysql_docker
 
-type "%ROOT%be\sql\schema.sql" | docker compose exec -T mysql mysql -ustaffmanager -pstaffmanager staffmanager
+type "%ROOT%be\sql\schema.sql" | docker compose exec -T mysql mysql -uroot staffmanager
 if errorlevel 1 exit /b 1
 
 set "STAFF_MANAGER_DB_URL=jdbc:mysql://127.0.0.1:3307/staffmanager?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Ho_Chi_Minh"
-set "STAFF_MANAGER_DB_USERNAME=staffmanager"
-set "STAFF_MANAGER_DB_PASSWORD=staffmanager"
+set "STAFF_MANAGER_DB_USERNAME=root"
+set "STAFF_MANAGER_DB_PASSWORD="
 cd /d "%ROOT%be"
 call gradlew.bat run
 exit /b %errorlevel%

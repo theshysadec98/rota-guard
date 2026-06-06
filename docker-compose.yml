@@ -5,15 +5,13 @@ services:
     image: mysql:8.4
     environment:
       MYSQL_DATABASE: staffmanager
-      MYSQL_USER: staffmanager
-      MYSQL_PASSWORD: staffmanager
-      MYSQL_ROOT_PASSWORD: staffmanager_root
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     ports:
       - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
     healthcheck:
-      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -pstaffmanager_root"]
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot"]
       interval: 5s
       timeout: 5s
       retries: 20
