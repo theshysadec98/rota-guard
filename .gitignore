@@ -15,7 +15,6 @@ Thumbs.db
 build/
 out/
 *.class
-*.jar
 *.war
 *.log
 hs_err_pid*
