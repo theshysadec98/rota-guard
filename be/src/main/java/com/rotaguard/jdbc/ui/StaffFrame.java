@@ -352,5 +352,3 @@ public class StaffFrame extends JFrame {
     JOptionPane.showMessageDialog(this, message, "Lỗi", JOptionPane.ERROR_MESSAGE);
   }
 }
-
-/* By Ly Minh Hoang */
