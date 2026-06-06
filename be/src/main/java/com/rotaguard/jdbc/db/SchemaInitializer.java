@@ -64,17 +64,6 @@ public final class SchemaInitializer {
           "0901000001",
           "lan.nguyen@bv.vn",
           5);
-      insertSeed(
-          statement,
-          "NV002",
-          "Tran Van Minh",
-          "ICU",
-          1.2,
-          "DOCTOR",
-          "0901000002",
-          "minh.tran@bv.vn",
-          12);
-      insertSeed(statement, "NV003", "Le Hoang Nam", "ER", 1.0, "NURSE", "0901000003", null, 2);
     }
   }
 

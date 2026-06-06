@@ -22,6 +22,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 public class StaffFrame extends JFrame {
@@ -57,6 +58,7 @@ public class StaffFrame extends JFrame {
 
     add(buildFormPanel(), BorderLayout.NORTH);
     add(buildTablePanel(), BorderLayout.CENTER);
+    add(buildFooterPanel(), BorderLayout.SOUTH);
 
     registerActions();
     resetForm();
@@ -115,6 +117,14 @@ public class StaffFrame extends JFrame {
     staffTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     staffTable.getTableHeader().setReorderingAllowed(false);
     return new JScrollPane(staffTable);
+  }
+
+  private JPanel buildFooterPanel() {
+    JPanel panel = new JPanel(new BorderLayout());
+    panel.setBorder(new EmptyBorder(0, 12, 12, 12));
+    JLabel ownerLabel = new JLabel("By Ly Minh Hoang", SwingConstants.RIGHT);
+    panel.add(ownerLabel, BorderLayout.EAST);
+    return panel;
   }
 
   private void addField(
@@ -342,3 +352,5 @@ public class StaffFrame extends JFrame {
     JOptionPane.showMessageDialog(this, message, "Lỗi", JOptionPane.ERROR_MESSAGE);
   }
 }
+
+/* By Ly Minh Hoang */

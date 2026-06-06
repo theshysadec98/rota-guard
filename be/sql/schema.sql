@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS staff;
+DROP TABLE IF EXISTS staff CASCADE;
 
 CREATE TABLE staff (
     ma_nv VARCHAR(20) PRIMARY KEY,
@@ -12,6 +12,4 @@ CREATE TABLE staff (
 );
 
 INSERT INTO staff (ma_nv, ho_ten, khoa, he_so, vai_tro, sdt, email, nam_kn) VALUES
-    ('NV001', 'Nguyen Thi Lan', 'ICU', 1.0, 'NURSE', '0901000001', 'lan.nguyen@bv.vn', 5),
-    ('NV002', 'Tran Van Minh', 'ICU', 1.2, 'DOCTOR', '0901000002', 'minh.tran@bv.vn', 12),
-    ('NV003', 'Le Hoang Nam', 'ER', 1.0, 'NURSE', '0901000003', NULL, 2);
+    ('NV001', 'Nguyen Thi Lan', 'ICU', 1.0, 'NURSE', '0901000001', 'lan.nguyen@bv.vn', 5);

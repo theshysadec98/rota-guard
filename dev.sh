@@ -29,6 +29,14 @@ case "${1:-run}" in
     cd be
     ./gradlew run
     ;;
+  start)
+    docker compose up -d postgres
+    wait_for_postgres
+    docker compose exec -T postgres psql -U rotaguard -d rotaguard < "$ROOT/be/sql/schema.sql"
+    echo "PostgreSQL ready. Opening desktop app..."
+    cd be
+    ./gradlew run
+    ;;
   build)
     cd be
     ./gradlew spotlessApply build
@@ -42,7 +50,7 @@ case "${1:-run}" in
     echo "DB volume removed."
     ;;
   *)
-    echo "Usage: $0 {run|app|up|postgres|schema|build|down|db-reset}"
+    echo "Usage: $0 {start|run|app|up|postgres|schema|build|down|db-reset}"
     exit 1
     ;;
 esac

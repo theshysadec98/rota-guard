@@ -40,22 +40,26 @@ File [schema.sql](/Users/hoang/my-app/rota-guard/be/sql/schema.sql:1) tạo bả
 
 ## Cách chạy
 
-Khởi động PostgreSQL:
+### Một lệnh — chạy full project (khuyến nghị)
 
 ```bash
-./dev.sh up
+./dev.sh start
 ```
 
-Nạp lại schema:
+Lệnh này: bật PostgreSQL → nạp `schema.sql` → mở app Swing.
+
+### Từng bước (tuỳ chọn)
 
 ```bash
-./dev.sh schema
+./dev.sh up       # chỉ PostgreSQL
+./dev.sh schema   # nạp / reset bảng staff
+./dev.sh run      # postgres + app (app tự tạo bảng nếu thiếu)
 ```
 
-Chạy ứng dụng:
+Nếu DB còn schema cũ (lỗi khi `schema`), reset volume rồi chạy lại:
 
 ```bash
-./dev.sh run
+./dev.sh db-reset && ./dev.sh start
 ```
 
 Build và format mã Java:
