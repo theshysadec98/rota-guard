@@ -26,7 +26,7 @@ public class StaffDao {
       }
       return staffs;
     } catch (SQLException exception) {
-      throw new IllegalStateException("Khong the tai danh sach nhan su", exception);
+      throw new IllegalStateException("Không thể tải danh sách nhân sự.", exception);
     }
   }
 
@@ -41,7 +41,7 @@ public class StaffDao {
       bindInsert(statement, staff);
       statement.executeUpdate();
     } catch (SQLException exception) {
-      throw new IllegalStateException("Khong the them nhan su", exception);
+      throw new IllegalStateException("Không thể thêm nhân sự.", exception);
     }
   }
 
@@ -64,7 +64,7 @@ public class StaffDao {
       statement.setString(8, staff.getMaNv());
       statement.executeUpdate();
     } catch (SQLException exception) {
-      throw new IllegalStateException("Khong the cap nhat nhan su", exception);
+      throw new IllegalStateException("Không thể cập nhật nhân sự.", exception);
     }
   }
 
@@ -75,7 +75,7 @@ public class StaffDao {
       statement.setString(1, maNv);
       statement.executeUpdate();
     } catch (SQLException exception) {
-      throw new IllegalStateException("Khong the xoa nhan su", exception);
+      throw new IllegalStateException("Không thể xóa nhân sự.", exception);
     }
   }
 
@@ -88,7 +88,7 @@ public class StaffDao {
         return resultSet.next();
       }
     } catch (SQLException exception) {
-      throw new IllegalStateException("Khong the kiem tra ma nhan vien", exception);
+      throw new IllegalStateException("Không thể kiểm tra mã nhân viên.", exception);
     }
   }
 

@@ -15,7 +15,7 @@ public final class SchemaInitializer {
       createTable(connection);
       seedDataIfEmpty(connection);
     } catch (SQLException exception) {
-      throw new IllegalStateException("Khong the khoi tao bang staff", exception);
+      throw new IllegalStateException("Không thể khởi tạo bảng staff.", exception);
     }
   }
 

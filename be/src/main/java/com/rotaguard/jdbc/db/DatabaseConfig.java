@@ -28,7 +28,7 @@ public final class DatabaseConfig {
         properties.load(inputStream);
       }
     } catch (IOException exception) {
-      throw new IllegalStateException("Khong the doc db.properties", exception);
+      throw new IllegalStateException("Không thể đọc file cấu hình db.properties.", exception);
     }
     return properties;
   }
