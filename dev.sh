@@ -6,7 +6,6 @@ cd "$ROOT"
 
 show_help() {
   cat <<'EOF'
-Staff Manager - Script chạy project cho Ubuntu/macOS
 
 Chạy ứng dụng:
   ./dev.sh
