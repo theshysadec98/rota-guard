@@ -1,21 +1,22 @@
 name: rota-guard
 
 services:
-  postgres:
-    image: postgres:16-alpine
+  mysql:
+    image: mysql:8.4
     environment:
-      POSTGRES_DB: rotaguard
-      POSTGRES_USER: rotaguard
-      POSTGRES_PASSWORD: rotaguard
+      MYSQL_DATABASE: rotaguard
+      MYSQL_USER: rotaguard
+      MYSQL_PASSWORD: rotaguard
+      MYSQL_ROOT_PASSWORD: rotaguard_root
     ports:
-      - "5432:5432"
+      - "3307:3306"
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - mysql_data:/var/lib/mysql
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U rotaguard -d rotaguard"]
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -protaguard_root"]
       interval: 5s
       timeout: 5s
-      retries: 5
+      retries: 20
 
 volumes:
-  pgdata:
+  mysql_data:

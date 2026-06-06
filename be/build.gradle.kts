@@ -32,7 +32,7 @@ sourceSets {
 }
 
 dependencies {
-    runtimeOnly("org.postgresql:postgresql:42.7.4")
+    runtimeOnly("com.mysql:mysql-connector-j:8.4.0")
 }
 
 spotless {

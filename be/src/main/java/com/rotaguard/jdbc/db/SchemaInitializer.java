@@ -26,7 +26,7 @@ public final class SchemaInitializer {
             ma_nv VARCHAR(20) PRIMARY KEY,
             ho_ten VARCHAR(255) NOT NULL,
             khoa VARCHAR(100) NOT NULL,
-            he_so DOUBLE PRECISION NOT NULL DEFAULT 1.0,
+            he_so DOUBLE NOT NULL DEFAULT 1.0,
             vai_tro VARCHAR(20) NOT NULL DEFAULT 'NURSE',
             sdt VARCHAR(15),
             email VARCHAR(255),

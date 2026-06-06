@@ -9,9 +9,6 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public final class DatabaseConfig {
-  private static final String DEFAULT_URL = "jdbc:postgresql://localhost:5432/rotaguard";
-  private static final String DEFAULT_USERNAME = "rotaguard";
-  private static final String DEFAULT_PASSWORD = "rotaguard";
   private static final Properties PROPERTIES = loadProperties();
 
   private DatabaseConfig() {}
@@ -34,22 +31,26 @@ public final class DatabaseConfig {
   }
 
   private static String getUrl() {
-    return readValue("ROTAGUARD_DB_URL", "db.url", DEFAULT_URL);
+    return readValue("ROTAGUARD_DB_URL", "db.url");
   }
 
   private static String getUsername() {
-    return readValue("ROTAGUARD_DB_USERNAME", "db.username", DEFAULT_USERNAME);
+    return readValue("ROTAGUARD_DB_USERNAME", "db.username");
   }
 
   private static String getPassword() {
-    return readValue("ROTAGUARD_DB_PASSWORD", "db.password", DEFAULT_PASSWORD);
+    return readValue("ROTAGUARD_DB_PASSWORD", "db.password");
   }
 
-  private static String readValue(String envKey, String propertyKey, String fallback) {
+  private static String readValue(String envKey, String propertyKey) {
     String envValue = System.getenv(envKey);
     if (envValue != null && !envValue.isBlank()) {
       return envValue;
     }
-    return PROPERTIES.getProperty(propertyKey, fallback).trim();
+    String propertyValue = PROPERTIES.getProperty(propertyKey);
+    if (propertyValue == null || propertyValue.isBlank()) {
+      throw new IllegalStateException("Thiếu cấu hình " + propertyKey + " trong db.properties.");
+    }
+    return propertyValue.trim();
   }
 }

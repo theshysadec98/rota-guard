@@ -7,6 +7,7 @@ Chương trình hỗ trợ 5 thao tác cơ bản: hiển thị, thêm, cập nh�
 
 - JDK 21
 - Docker và Docker Compose
+- Với Windows nếu muốn dùng MySQL local: cài MySQL Server và công cụ `mysql` trong `PATH`
 
 ## Cấu trúc chính
 
@@ -15,6 +16,7 @@ rota-guard/
 ├── README.md
 ├── TECH.md
 ├── dev.sh
+├── dev.bat
 ├── docker-compose.yml
 └── be/
     ├── build.gradle.kts
@@ -30,48 +32,61 @@ rota-guard/
 | `ma_nv` | `VARCHAR(20)` | Mã nhân viên, khóa chính |
 | `ho_ten` | `VARCHAR(255)` | Họ tên |
 | `khoa` | `VARCHAR(100)` | Khoa / đơn vị |
-| `he_so` | `DOUBLE PRECISION` | Hệ số |
+| `he_so` | `DOUBLE` | Hệ số |
 | `vai_tro` | `VARCHAR(20)` | `DOCTOR` hoặc `NURSE` |
 | `sdt` | `VARCHAR(15)` | Số điện thoại |
 | `email` | `VARCHAR(255)` | Email |
 | `nam_kn` | `INT` | Năm kinh nghiệm |
 
-File [schema.sql](/Users/hoang/my-app/rota-guard/be/sql/schema.sql:1) tạo bảng và seed sẵn 3 dòng dữ liệu mẫu.
+File [schema.sql](/Users/hoang/my-app/rota-guard/be/sql/schema.sql:1) tạo bảng và seed sẵn 1 dòng dữ liệu mẫu.
 
 ## Cách chạy
 
-### Một lệnh — chạy full project (khuyến nghị)
+### Ubuntu / macOS
 
 ```bash
-./dev.sh start
+./dev.sh
 ```
 
-Lệnh này: bật PostgreSQL → nạp `schema.sql` → mở app Swing.
+Script sẽ dùng MySQL trong Docker.
 
-### Từng bước (tuỳ chọn)
+### Windows
 
-```bash
-./dev.sh up       # chỉ PostgreSQL
-./dev.sh schema   # nạp / reset bảng staff
-./dev.sh run      # postgres + app (app tự tạo bảng nếu thiếu)
+```bat
+dev.bat
 ```
 
-Nếu DB còn schema cũ (lỗi khi `schema`), reset volume rồi chạy lại:
+Script Windows sẽ:
+1. thử dùng MySQL local ở `127.0.0.1:3306` với tài khoản `rotaguard/rotaguard`
+2. nếu không dùng được thì tự mở MySQL bằng Docker ở cổng `3307`
+3. nạp dữ liệu mẫu và chạy ứng dụng desktop
 
-```bash
-./dev.sh db-reset && ./dev.sh start
-```
+## Build
 
-Build và format mã Java:
+Ubuntu / macOS:
 
 ```bash
 ./dev.sh build
 ```
 
-Dừng PostgreSQL:
+Windows:
+
+```bat
+dev.bat build
+```
+
+## Tắt MySQL Docker
+
+Ubuntu / macOS:
 
 ```bash
 ./dev.sh down
+```
+
+Windows:
+
+```bat
+dev.bat down
 ```
 
 ## Sử dụng giao diện
@@ -88,7 +103,7 @@ Dừng PostgreSQL:
 File mặc định: `be/src/main/resources/db.properties`
 
 ```properties
-db.url=jdbc:postgresql://localhost:5432/rotaguard
+db.url=jdbc:mysql://localhost:3306/rotaguard?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Ho_Chi_Minh
 db.username=rotaguard
 db.password=rotaguard
 ```
